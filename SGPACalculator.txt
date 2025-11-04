@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class VTUSGPACalculator {
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("VTU SGPA Calculator (2022 Scheme)");
+        System.out.println("----------------------------------");
+
+        System.out.print("Enter the number of subjects: ");
+        int numSubjects = input.nextInt();
+
+        double totalGradePointsXCredits = 0;
+        double totalCredits = 0;
+
+        for (int i = 1; i <= numSubjects; i++) {
+            System.out.println("\nSubject " + i + ":");
+            System.out.print("Enter credits for Subject " + i + ": ");
+            double credits = input.nextDouble();
+
+            System.out.print("Enter grade points for Subject " + i + " (0-10): ");
+            double gradePoints = input.nextDouble();
+
+            // Input validation for grade points
+            if (gradePoints < 0 || gradePoints > 10) {
+                System.out.println("Invalid grade points. Please enter a value between 0 and 10.");
+                i--; // Decrement i to re-enter details for the current subject
+                continue;
+            }
+
+            totalGradePointsXCredits += (credits * gradePoints);
+            totalCredits += credits;
+        }
+
+        if (totalCredits == 0) {
+            System.out.println("Cannot calculate SGPA as total credits are zero.");
+        } else {
+            double sgpa = totalGradePointsXCredits / totalCredits;
+            System.out.printf("\nCalculated SGPA: %.2f\n", sgpa);
+        }
+
+        input.close();
+    }
+}
