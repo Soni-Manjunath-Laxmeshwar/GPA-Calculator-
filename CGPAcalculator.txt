@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class VTUCGPACalculator {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of semesters: ");
+        int numSemesters = scanner.nextInt();
+
+        double totalWeightedSGPA = 0;
+        int totalCredits = 0;
+
+        for (int i = 1; i <= numSemesters; i++) {
+            System.out.println("\n--- Semester " + i + " ---");
+            System.out.print("Enter SGPA for Semester " + i + ": ");
+            double sgpa = scanner.nextDouble();
+
+            System.out.print("Enter total credits for Semester " + i + ": ");
+            int credits = scanner.nextInt();
+
+            totalWeightedSGPA += (sgpa * credits);
+            totalCredits += credits;
+        }
+
+        if (totalCredits > 0) {
+            double cgpa = totalWeightedSGPA / totalCredits;
+            System.out.printf("\nYour VTU CGPA (2022 Scheme) is: %.2f%n", cgpa);
+        } else {
+            System.out.println("Cannot calculate CGPA. Total credits must be greater than zero.");
+        }
+
+        scanner.close();
+    }
+}
